@@ -51,6 +51,8 @@ class RecipeUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
         return super().form_valid(form)
     
 
+
+
 class RecipeDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
     model = models.Recipe
     success_url = reverse_lazy('recipes-home')
@@ -59,3 +61,5 @@ class RecipeDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
     def test_func(self):
         recipe = self.get_object()
         return self.request.user == recipe.auther
+
+
