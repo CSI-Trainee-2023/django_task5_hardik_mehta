@@ -37,6 +37,9 @@ class RecipeCreateView(LoginRequiredMixin,CreateView):
         return super().form_valid(form)
     
 
+
+
+
 class RecipeUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model = models.Recipe
     fields = ['title','description']
