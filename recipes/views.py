@@ -39,7 +39,7 @@ class RecipeCreateView(LoginRequiredMixin,CreateView):
 
 
 
-
+#for updation of recipe
 class RecipeUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model = models.Recipe
     fields = ['title','description']
