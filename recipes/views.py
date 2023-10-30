@@ -56,7 +56,7 @@ class RecipeUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
 
 
 
-class RecipeDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
+class RecipeDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView,):
     model = models.Recipe
     success_url = reverse_lazy('recipes-home')
 
@@ -66,3 +66,22 @@ class RecipeDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
         return self.request.user == recipe.auther
 
 
+def comment(request):
+    comments = models.Comment.objects.all()
+    context = {
+        'comments' : comments
+    }
+    return render(request,"recipes/recipe_detail.html",context)
+
+
+class CommentCreate(LoginRequiredMixin,CreateView):
+    model = models.Comment
+    fields = ['comment']
+    success_url = reverse_lazy('recipes-comment')
+
+
+
+class CommentView(ListView):
+    model = models.Comment
+    template_name = 'recipes/recipe_detail.html'
+    context_object_name = 'comments'
