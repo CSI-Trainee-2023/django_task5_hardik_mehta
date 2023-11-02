@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-$8#q+5^hj$v06&5+ie1dg^$n4r^9wa-1152wf3!45@k1s3g5ei
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['hardik-recipeapp.onrender.com']
+CSRF_TRUSTED_ORIGINS = ['https://hardik-recipeapp.onrender.com']
 
 
 # Application definition
