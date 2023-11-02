@@ -1,6 +1,6 @@
 from django.forms.models import BaseModelForm
 from django.http import HttpResponse
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,HttpResponse,get_object_or_404
 from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from . import models
@@ -21,8 +21,21 @@ class RecipeListView(ListView):
     context_object_name = 'recipes'
 
 
-class RecipeDetailView(DetailView):
-    model = models.Recipe
+#class RecipeDetailView(DetailView):
+    #model = models.Recipe
+
+def recipeDetailView(request,pk):
+    recipe = models.Recipe.objects.get(id=pk)
+    
+    comment=models.Comment.objects.filter(recipe=pk)
+    
+    context = {
+        'object' : recipe,
+        'comments':comment
+    }
+    
+    return render(request,"recipes/recipe_detail.html",context)
+
 
 def about(request):
     return render(request,"recipes/about.html",{'title':'about us page'})
@@ -30,7 +43,7 @@ def about(request):
 
 class RecipeCreateView(LoginRequiredMixin,CreateView):
     model = models.Recipe
-    fields = ['title','description']
+    fields = ['title','description','image']
 
     def form_valid(self,form):
         form.instance.auther = self.request.user
@@ -42,7 +55,7 @@ class RecipeCreateView(LoginRequiredMixin,CreateView):
 #for updation of recipe
 class RecipeUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model = models.Recipe
-    fields = ['title','description']
+    fields = ['title','description','image']
 
 
     def test_func(self):
@@ -66,7 +79,7 @@ class RecipeDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView,):
         return self.request.user == recipe.auther
 
 
-def comment(request):
+def comment(request,id):
     comments = models.Comment.objects.all()
     context = {
         'comments' : comments
@@ -77,7 +90,12 @@ def comment(request):
 class CommentCreate(LoginRequiredMixin,CreateView):
     model = models.Comment
     fields = ['comment']
-    success_url = reverse_lazy('recipes-comment')
+    def form_valid(self,form,**kwargs):
+        recipe=get_object_or_404(models.Recipe,pk=self.kwargs.get('pk'))
+        form.instance.recipe = recipe
+        return super().form_valid(form)
+
+    #success_url = reverse_lazy('recipes-detail')
 
 
 

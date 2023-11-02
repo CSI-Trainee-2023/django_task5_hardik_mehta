@@ -1,0 +1,52 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color:rgb(236, 227, 206);
+    
+}
+.container{
+    width: 100%;
+}
+#button1{
+    margin-left: 1vw ;
+    margin-top: 1vw;
+    border: 2px rgb(116, 71, 71) solid;
+}
+#button2{
+    margin-left: 1vw ;
+    margin-top: 1vw;
+    border: 2px rgb(116, 71, 71) solid;
+}
+#button3{
+    margin-left: 1vw ;
+    margin-top: 1vw;
+    border: 2px rgb(116, 71, 71) solid;
+}
+.comment{
+    margin-top: 2vh;
+    width: 100%;
+    border: 2px gray solid ;
+}
+p{
+    font-size: large;
+    margin-left: 1vw;
+}
+#head{
+    margin-left: 1vw;
+}
+#profile{
+    margin-right: 1vw;
+    color: aliceblue;
+
+}
+#logout{
+    margin-right: 1vw;
+}
+.register{
+    margin-right: 1vw;
+}
+.card{
+    margin: 1vw 1vh;
+}

@@ -9,6 +9,8 @@ class Recipe(models.Model):
 
     auther = models.ForeignKey(User,on_delete=models.CASCADE)
 
+    image = models.ImageField(upload_to='images',blank=True,null=True, default ='cooking.jpg')
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -20,7 +22,8 @@ class Recipe(models.Model):
 
 
 class Comment(models.Model):
-    comment = models.ForeignKey(User,on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe,on_delete=models.CASCADE)
+    comment = models.CharField(max_length=100)
 
     def get_absolute_url(self):
-        return reverse("recipes-detail")
+        return reverse("recipes-detail",kwargs = {"pk":self.recipe.id})

@@ -1,0 +1,25 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.card{
+    display: flex;
+    flex-direction: column;
+    width: 30vw;
+    margin: 1vw 1vh;
+}
+.cardWrapper{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+}
+img{
+    width: 200px;
+    height: 200px;
+    background-size: contain;
+    margin-left: 180px;
+}
+.btn{
+    border: 2px rgb(153, 73, 73) solid;
+    background-color: rgb(165, 73, 73);
+}

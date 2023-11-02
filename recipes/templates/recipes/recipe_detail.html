@@ -1,31 +1,35 @@
 {% extends 'recipes/base.html' %}
+{% load static %}
 
     {% block content %}
+    <link rel="stylesheet" href="{% static 'home.css' %}">
     <h1>Recipe #{{object.id}}</h1>
    
-    <div class="card" style="width: 18rem;">
+    <div class="card" style="width: 40rem;">
         <div class="card-body">
           <h3 class="card-title">{{object.title}}</h3>
           <h6 class="card-subtitle mb-2 text-muted">{{object.auther}}</h6>
           <h6 class="card-text">{{object.description}}</h6>
           <h6 class="card-subtitle mb-2 text-muted">{{object.updated_at|date:"F d, Y"}}</h6>
+          <img src="{{object.image.url}}" alt="Recipe Image">
         </div>
       </div>
 
-
       
       <div class="col-4">
-        <a class="btn btn-outline-info" href="{% url 'recipes-update' recipe.id %}">Update</a>
-        <a class="btn btn-outline-danger" href="{% url 'recipes-delete' recipe.id %}">Delete</a>
+        <a id="button1" class="btn" href="{% url 'recipes-update' object.id %}">Update</a>
+        <a id="button2" class="btn" href="{% url 'recipes-delete' object.id %}">Delete</a>
       </div>
 
       <div class="link">
-        <a class="btn btn-outline-info" href="{% url 'recipes-comment' recipe.id %}">Comment</a>
+        <a id="button3" class="btn " href="{% url 'recipes-comment' object.id %}">Comment</a>
       </div>
+      <div class="Comments">
+      <h3 id="head">Comments</h3>
       {% for comment in comments %}
       <div class="comm">
-         <h2>{{Comment.comment}}</h2>
+         <p>{{comment.comment}}</p>
       </div>
       {% endfor %}
-      
+    </div>
     {% endblock content %}

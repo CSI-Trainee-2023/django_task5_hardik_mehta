@@ -1,16 +1,20 @@
 {% extends 'recipes/base.html' %}
-
+{% load static %}
     {% block content %}
-    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="{% static 'home.css' %}">
     <h1>Recipes</h1>
-    {% for recipe in recipes %}
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
+    <div class="cardWrapper">
+
+      {% for recipe in recipes %}
+      <div class="card" style="width: 30rem;" >
+        <div class="card-body" >
           <h3 class="card-title">{{recipe.title}}</h3>
           <h6 class="card-subtitle mb-2 text-muted">{{recipe.auther}}</h6>
+          <h6 class="card-subtitle mb-2 text-muted">{{recipe.description}}</h6>
           <h6 class="card-subtitle mb-2 text-muted">{{recipe.updated_at|date:"F d, Y"}}</h6>
           <a href="{% url 'recipes-detail' recipe.pk %}" class="btn btn-primary">View Recipe</a>
         </div>
       </div>
-    {% endfor %}
+      {% endfor %}
+    </div>
     {% endblock content %}
